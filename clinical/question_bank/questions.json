@@ -1,0 +1,353 @@
+[
+  {
+    "question_id": "CHIEF_COMPLAINT_001",
+    "category": "chief_complaint",
+    "subcategory": null,
+    "control_type": "text",
+    "input_type": "both",
+    "order_index": 1,
+    "translations": {
+      "en": "What is your main problem or complaint today?",
+      "hi": "आज आपकी मुख्य समस्या या शिकायत क्या है?",
+      "kn": "ಇಂದು ನಿಮ್ಮ ಮುಖ್ಯ ಸಮಸ್ಯೆ ಅಥವಾ ದೂರು ಏನು?",
+      "ta": "இன்று உங்கள் முக்கிய பிரச்சனை அல்லது புகார் என்ன?",
+      "te": "ఈ రోజు మీ ప్రధాన సమస్య లేదా ఫిర్యాదు ఏమిటి?"
+    }
+  },
+  {
+    "question_id": "SOCRATES_SITE_001",
+    "category": "socrates",
+    "subcategory": "site",
+    "control_type": "body_location",
+    "input_type": "both",
+    "order_index": 10,
+    "translations": {
+      "en": "Where exactly do you feel the pain or discomfort?",
+      "hi": "आप दर्द या असुविधा कहाँ महसूस करते हैं?",
+      "kn": "ನೀವು ನೋವು ಅಥವಾ ಅಸ್ವಸ್ಥತೆಯನ್ನು ಎಲ್ಲಿ ಅನುಭವಿಸುತ್ತೀರಿ?",
+      "ta": "நீங்கள் வலி அல்லது அசௌகரியத்தை எங்கு உணர்கிறீர்கள்?",
+      "te": "మీకు నొప్పి లేదా అసౌకర్యం ఎక్కడ అనిపిస్తోంది?"
+    }
+  },
+  {
+    "question_id": "SOCRATES_ONSET_001",
+    "category": "socrates",
+    "subcategory": "onset",
+    "control_type": "single_choice",
+    "input_type": "both",
+    "order_index": 11,
+    "options": [
+      {"value": "today", "label_en": "Today", "label_hi": "आज", "label_kn": "ಇಂದು"},
+      {"value": "yesterday", "label_en": "Yesterday", "label_hi": "कल", "label_kn": "ನಿನ್ನೆ"},
+      {"value": "2_7_days", "label_en": "2-7 days ago", "label_hi": "2-7 दिन पहले", "label_kn": "2-7 ದಿನಗಳ ಹಿಂದೆ"},
+      {"value": "1_4_weeks", "label_en": "1-4 weeks ago", "label_hi": "1-4 हफ्ते पहले", "label_kn": "1-4 ವಾರಗಳ ಹಿಂದೆ"},
+      {"value": "over_1_month", "label_en": "Over 1 month", "label_hi": "1 महीने से अधिक", "label_kn": "1 ತಿಂಗಳಿಗಿಂತ ಹೆಚ್ಚು"}
+    ],
+    "translations": {
+      "en": "When did this problem start?",
+      "hi": "यह समस्या कब शुरू हुई?",
+      "kn": "ಈ ಸಮಸ್ಯೆ ಯಾವಾಗ ಪ್ರಾರಂಭವಾಯಿತು?",
+      "ta": "இந்த பிரச்சனை எப்போது தொடங்கியது?",
+      "te": "ఈ సమస్య ఎప్పుడు మొదలైంది?"
+    }
+  },
+  {
+    "question_id": "SOCRATES_CHARACTER_001",
+    "category": "socrates",
+    "subcategory": "character",
+    "control_type": "multiple_choice",
+    "input_type": "both",
+    "order_index": 12,
+    "options": [
+      {"value": "sharp", "label_en": "Sharp / Stabbing", "label_hi": "तीखा / चुभन", "label_kn": "ತೀಕ್ಷ್ಣ / ಚುಚ್ಚುವ"},
+      {"value": "dull", "label_en": "Dull / Aching", "label_hi": "हल्का / दर्द", "label_kn": "ಮಂದ / ನೋವಿನ"},
+      {"value": "burning", "label_en": "Burning", "label_hi": "जलन", "label_kn": "ಉರಿ"},
+      {"value": "crushing", "label_en": "Crushing / Pressure", "label_hi": "दबाव / भारीपन", "label_kn": "ಒತ್ತಡ / ಭಾರ"},
+      {"value": "throbbing", "label_en": "Throbbing / Pulsating", "label_hi": "धड़कन / स्पंदन", "label_kn": "ಮಿಡಿತ"},
+      {"value": "cramp", "label_en": "Cramping", "label_hi": "ऐंठन", "label_kn": "ಸೆಳೆತ"}
+    ],
+    "translations": {
+      "en": "How would you describe the pain? (Select all that apply)",
+      "hi": "दर्द को कैसे बताएंगे? (सभी लागू होने वाले चुनें)",
+      "kn": "ನೋವನ್ನು ಹೇಗೆ ವಿವರಿಸುವಿರಿ? (ಎಲ್ಲಾ ಅನ್ವಯಿಸುವವುಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಿ)",
+      "ta": "வலியை எப்படி விவரிப்பீர்கள்?",
+      "te": "నొప్పిని ఎలా వివరిస్తారు?"
+    }
+  },
+  {
+    "question_id": "SOCRATES_RADIATION_001",
+    "category": "socrates",
+    "subcategory": "radiation",
+    "control_type": "yes_no",
+    "input_type": "both",
+    "order_index": 13,
+    "translations": {
+      "en": "Does the pain spread to any other part of your body?",
+      "hi": "क्या दर्द आपके शरीर के किसी अन्य हिस्से में फैलता है?",
+      "kn": "ನೋವು ನಿಮ್ಮ ದೇಹದ ಬೇರೆ ಭಾಗಕ್ಕೆ ಹರಡುತ್ತದೆಯೇ?",
+      "ta": "வலி உங்கள் உடலின் வேறு பகுதிக்கு பரவுகிறதா?",
+      "te": "నొప్పి మీ శరీరంలో మరే భాగానికైనా వ్యాపిస్తుందా?"
+    }
+  },
+  {
+    "question_id": "SOCRATES_RADIATION_002",
+    "category": "socrates",
+    "subcategory": "radiation",
+    "control_type": "body_location",
+    "input_type": "both",
+    "order_index": 14,
+    "parent_question_id": "SOCRATES_RADIATION_001",
+    "trigger_condition": {"parent": "SOCRATES_RADIATION_001", "response": "yes"},
+    "translations": {
+      "en": "Where does the pain spread to?",
+      "hi": "दर्द कहाँ फैलता है?",
+      "kn": "ನೋವು ಎಲ್ಲಿಗೆ ಹರಡುತ್ತದೆ?",
+      "ta": "வலி எங்கு பரவுகிறது?",
+      "te": "నొప్పి ఎక్కడికి వ్యాపిస్తుంది?"
+    }
+  },
+  {
+    "question_id": "SOCRATES_SEVERITY_001",
+    "category": "socrates",
+    "subcategory": "severity",
+    "control_type": "severity_scale",
+    "input_type": "both",
+    "order_index": 15,
+    "options": {"min": 0, "max": 10, "step": 1, "labels": {"0": "No pain", "5": "Moderate", "10": "Worst"}},
+    "translations": {
+      "en": "On a scale of 0 to 10, how severe is your pain? (0 = no pain, 10 = worst pain imaginable)",
+      "hi": "0 से 10 के पैमाने पर, आपका दर्द कितना गंभीर है? (0 = कोई दर्द नहीं, 10 = सबसे बुरा दर्द)",
+      "kn": "0 ರಿಂದ 10 ರ ಮಾಪಕದಲ್ಲಿ, ನಿಮ್ಮ ನೋವು ಎಷ್ಟು ತೀವ್ರವಾಗಿದೆ?",
+      "ta": "0 முதல் 10 வரையிலான அளவில், உங்கள் வலி எவ்வளவு தீவிரமாக உள்ளது?",
+      "te": "0 నుండి 10 వరకు స్కేల్‌పై, మీ నొప్పి ఎంత తీవ్రంగా ఉంది?"
+    }
+  },
+  {
+    "question_id": "SOCRATES_TIMING_001",
+    "category": "socrates",
+    "subcategory": "timing",
+    "control_type": "single_choice",
+    "input_type": "both",
+    "order_index": 16,
+    "options": [
+      {"value": "constant", "label_en": "Constant / Always there", "label_hi": "निरंतर / हमेशा", "label_kn": "ನಿರಂತರ"},
+      {"value": "intermittent", "label_en": "Comes and goes", "label_hi": "आता-जाता है", "label_kn": "ಬರುತ್ತದೆ ಮತ್ತು ಹೋಗುತ್ತದೆ"},
+      {"value": "sudden", "label_en": "Sudden onset", "label_hi": "अचानक शुरू", "label_kn": "ಹಠಾತ್ ಪ್ರಾರಂಭ"},
+      {"value": "gradual", "label_en": "Gradually worsening", "label_hi": "धीरे-धीरे बढ़ता", "label_kn": "ಕ್ರಮೇಣ ಹದಗೆಡುವ"}
+    ],
+    "translations": {
+      "en": "Is the problem constant or does it come and go?",
+      "hi": "क्या समस्या निरंतर है या आती-जाती है?",
+      "kn": "ಸಮಸ್ಯೆ ನಿರಂತರವಾಗಿ ಇದೆಯೇ ಅಥವಾ ಬರುತ್ತದೆ ಮತ್ತು ಹೋಗುತ್ತದೆಯೇ?",
+      "ta": "பிரச்சனை தொடர்ந்து இருக்கிறதா அல்லது வந்து போகிறதா?",
+      "te": "సమస్య నిరంతరంగా ఉంటుందా లేదా వచ్చిపోతుందా?"
+    }
+  },
+  {
+    "question_id": "SOCRATES_AGGRAVATING_001",
+    "category": "socrates",
+    "subcategory": "exacerbating",
+    "control_type": "multiple_choice",
+    "input_type": "both",
+    "order_index": 17,
+    "options": [
+      {"value": "movement", "label_en": "Movement", "label_hi": "हलचल", "label_kn": "ಚಲನೆ"},
+      {"value": "eating", "label_en": "Eating", "label_hi": "खाना", "label_kn": "ತಿನ್ನುವುದು"},
+      {"value": "lying_down", "label_en": "Lying down", "label_hi": "लेटना", "label_kn": "ಮಲಗುವುದು"},
+      {"value": "exertion", "label_en": "Physical exertion", "label_hi": "शारीरिक परिश्रम", "label_kn": "ದೈಹಿಕ ಪರಿಶ್ರಮ"},
+      {"value": "stress", "label_en": "Stress / Anxiety", "label_hi": "तनाव", "label_kn": "ಒತ್ತಡ"},
+      {"value": "cold", "label_en": "Cold weather", "label_hi": "ठंडा मौसम", "label_kn": "ತಂಪಾದ ಹವಾಮಾನ"},
+      {"value": "nothing", "label_en": "Nothing makes it worse", "label_hi": "कुछ भी बुरा नहीं करता", "label_kn": "ಯಾವುದೂ ಹದಗೆಡಿಸುವುದಿಲ್ಲ"}
+    ],
+    "translations": {
+      "en": "What makes the problem worse?",
+      "hi": "क्या चीज़ समस्या को और बदतर बनाती है?",
+      "kn": "ಯಾವುದು ಸಮಸ್ಯೆಯನ್ನು ಇನ್ನಷ್ಟು ಹದಗೆಡಿಸುತ್ತದೆ?",
+      "ta": "எது பிரச்சனையை மோசமாக்குகிறது?",
+      "te": "ఏది సమస్యను మరింత అధ్వాన్నంగా చేస్తుంది?"
+    }
+  },
+  {
+    "question_id": "SOCRATES_RELIEVING_001",
+    "category": "socrates",
+    "subcategory": "relieving",
+    "control_type": "multiple_choice",
+    "input_type": "both",
+    "order_index": 18,
+    "options": [
+      {"value": "rest", "label_en": "Rest", "label_hi": "आराम", "label_kn": "ವಿಶ್ರಾಂತಿ"},
+      {"value": "medication", "label_en": "Medication / Tablets", "label_hi": "दवाई", "label_kn": "ಔಷಧ"},
+      {"value": "heat", "label_en": "Heat / Hot compress", "label_hi": "गर्म सेंक", "label_kn": "ಶಾಖ"},
+      {"value": "ice", "label_en": "Ice / Cold compress", "label_hi": "बर्फ", "label_kn": "ಮಂಜುಗಡ್ಡೆ"},
+      {"value": "food", "label_en": "Eating food", "label_hi": "खाना खाने से", "label_kn": "ಊಟ ಮಾಡಿದಾಗ"},
+      {"value": "position_change", "label_en": "Changing position", "label_hi": "स्थिति बदलने से", "label_kn": "ಸ್ಥಾನ ಬದಲಾಯಿಸಿದಾಗ"},
+      {"value": "nothing", "label_en": "Nothing relieves it", "label_hi": "कुछ भी राहत नहीं देता", "label_kn": "ಯಾವುದೂ ಶಮನ ಮಾಡುವುದಿಲ್ಲ"}
+    ],
+    "translations": {
+      "en": "What makes the problem better?",
+      "hi": "क्या चीज़ समस्या को बेहतर बनाती है?",
+      "kn": "ಯಾವುದು ಸಮಸ್ಯೆಯನ್ನು ಉತ್ತಮಗೊಳಿಸುತ್ತದೆ?",
+      "ta": "எது பிரச்சனையை சரி செய்கிறது?",
+      "te": "ఏది సమస్యను మెరుగుపరుస్తుంది?"
+    }
+  },
+  {
+    "question_id": "ASSOCIATED_SYMPTOMS_001",
+    "category": "socrates",
+    "subcategory": "associated",
+    "control_type": "multiple_choice",
+    "input_type": "both",
+    "order_index": 19,
+    "options": [
+      {"value": "fever", "label_en": "Fever", "label_hi": "बुखार", "label_kn": "ಜ್ವರ"},
+      {"value": "nausea", "label_en": "Nausea / Vomiting", "label_hi": "मतली / उल्टी", "label_kn": "ವಾಕರಿಕೆ / ವಾಂತಿ"},
+      {"value": "shortness_of_breath", "label_en": "Shortness of breath", "label_hi": "सांस फूलना", "label_kn": "ಉಸಿರಾಟ ತೊಂದರೆ"},
+      {"value": "sweating", "label_en": "Excessive sweating", "label_hi": "अत्यधिक पसीना", "label_kn": "ಅತಿಯಾದ ಬೆವರು"},
+      {"value": "dizziness", "label_en": "Dizziness / Fainting", "label_hi": "चक्कर / बेहोशी", "label_kn": "ತಲೆತಿರುಗುವಿಕೆ"},
+      {"value": "headache", "label_en": "Headache", "label_hi": "सिरदर्द", "label_kn": "ತಲೆನೋವು"},
+      {"value": "palpitations", "label_en": "Palpitations / Racing heart", "label_hi": "धड़कन / दिल तेज़", "label_kn": "ಹೃದಯ ಬಡಿತ"},
+      {"value": "cough", "label_en": "Cough", "label_hi": "खांसी", "label_kn": "ಕೆಮ್ಮು"},
+      {"value": "none", "label_en": "None of the above", "label_hi": "इनमें से कोई नहीं", "label_kn": "ಯಾವುದೂ ಇಲ್ಲ"}
+    ],
+    "translations": {
+      "en": "Do you have any of these associated symptoms?",
+      "hi": "क्या आपको इनमें से कोई लक्षण हैं?",
+      "kn": "ನಿಮಗೆ ಈ ಯಾವುದಾದರೂ ಸಂಬಂಧಿತ ಲಕ್ಷಣಗಳಿವೆಯೇ?",
+      "ta": "இந்த அறிகுறிகளில் ஏதேனும் உள்ளதா?",
+      "te": "మీకు ఈ సంబంధిత లక్షణాలలో ఏవైనా ఉన్నాయా?"
+    }
+  },
+  {
+    "question_id": "HISTORY_PAST_MEDICAL_001",
+    "category": "general_history",
+    "subcategory": "past_medical",
+    "control_type": "multiple_choice",
+    "input_type": "both",
+    "order_index": 30,
+    "options": [
+      {"value": "diabetes", "label_en": "Diabetes", "label_hi": "मधुमेह", "label_kn": "ಮಧುಮೇಹ"},
+      {"value": "hypertension", "label_en": "High Blood Pressure", "label_hi": "उच्च रक्तचाप", "label_kn": "ಅಧಿಕ ರಕ್ತದೊತ್ತಡ"},
+      {"value": "heart_disease", "label_en": "Heart Disease", "label_hi": "हृदय रोग", "label_kn": "ಹೃದಯ ರೋಗ"},
+      {"value": "asthma", "label_en": "Asthma / Lung Disease", "label_hi": "अस्थमा / फेफड़े की बीमारी", "label_kn": "ಆಸ್ತಮಾ"},
+      {"value": "thyroid", "label_en": "Thyroid", "label_hi": "थायराइड", "label_kn": "ಥೈರಾಯ್ಡ್"},
+      {"value": "kidney", "label_en": "Kidney Disease", "label_hi": "किडनी रोग", "label_kn": "ಮೂತ್ರಪಿಂಡ ರೋಗ"},
+      {"value": "none", "label_en": "None", "label_hi": "कोई नहीं", "label_kn": "ಯಾವುದೂ ಇಲ್ಲ"}
+    ],
+    "translations": {
+      "en": "Do you have any existing medical conditions? (Select all that apply)",
+      "hi": "क्या आपको कोई पूर्व चिकित्सा स्थिति है?",
+      "kn": "ನಿಮಗೆ ಯಾವುದಾದರೂ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ವೈದ್ಯಕೀಯ ಸ್ಥಿತಿ ಇದೆಯೇ?",
+      "ta": "உங்களுக்கு ஏதாவது தற்போதுள்ள மருத்துவ நிலைகள் உள்ளதா?",
+      "te": "మీకు ఏదైనా ప్రస్తుత వైద్య పరిస్థితులు ఉన్నాయా?"
+    }
+  },
+  {
+    "question_id": "HISTORY_SURGERY_001",
+    "category": "general_history",
+    "subcategory": "surgical",
+    "control_type": "yes_no",
+    "input_type": "both",
+    "order_index": 31,
+    "translations": {
+      "en": "Have you had any surgery or operations in the past?",
+      "hi": "क्या आपने कभी कोई सर्जरी या ऑपरेशन करवाया है?",
+      "kn": "ನೀವು ಹಿಂದೆ ಯಾವುದಾದರೂ ಶಸ್ತ್ರಚಿಕಿತ್ಸೆ ಮಾಡಿಸಿಕೊಂಡಿದ್ದೀರಾ?",
+      "ta": "கடந்த காலத்தில் ஏதாவது அறுவை சிகிச்சை செய்துகொண்டீர்களா?",
+      "te": "గతంలో మీకు ఏదైనా శస్త్రచికిత్స చేయబడిందా?"
+    }
+  },
+  {
+    "question_id": "MEDICATION_CURRENT_001",
+    "category": "medication",
+    "subcategory": null,
+    "control_type": "yes_no",
+    "input_type": "both",
+    "order_index": 40,
+    "translations": {
+      "en": "Are you currently taking any medicines?",
+      "hi": "क्या आप अभी कोई दवाई ले रहे हैं?",
+      "kn": "ನೀವು ಈಗ ಯಾವುದಾದರೂ ಔಷಧ ತೆಗೆದುಕೊಳ್ಳುತ್ತಿದ್ದೀರಾ?",
+      "ta": "தற்போது ஏதாவது மருந்துகள் எடுத்துக்கொள்கிறீர்களா?",
+      "te": "మీరు ప్రస్తుతం ఏదైనా మందులు తీసుకుంటున్నారా?"
+    }
+  },
+  {
+    "question_id": "ALLERGY_001",
+    "category": "allergy",
+    "subcategory": null,
+    "control_type": "yes_no",
+    "input_type": "both",
+    "order_index": 50,
+    "translations": {
+      "en": "Are you allergic to any medicines, foods, or substances?",
+      "hi": "क्या आपको किसी दवाई, खाने या पदार्थ से एलर्जी है?",
+      "kn": "ನಿಮಗೆ ಯಾವುದಾದರೂ ಔಷಧ, ಆಹಾರ ಅಥವಾ ಪದಾರ್ಥಗಳಿಗೆ ಅಲರ್ಜಿ ಇದೆಯೇ?",
+      "ta": "ஏதாவது மருந்துகள், உணவுகள் அல்லது பொருட்களுக்கு ஒவ்வாமை உள்ளதா?",
+      "te": "మీకు ఏదైనా మందులు, ఆహారాలు లేదా పదార్థాలకు అలర్జీ ఉందా?"
+    }
+  },
+  {
+    "question_id": "FAMILY_HISTORY_001",
+    "category": "family_history",
+    "subcategory": null,
+    "control_type": "multiple_choice",
+    "input_type": "both",
+    "order_index": 60,
+    "options": [
+      {"value": "diabetes", "label_en": "Diabetes", "label_hi": "मधुमेह", "label_kn": "ಮಧುಮೇಹ"},
+      {"value": "hypertension", "label_en": "High Blood Pressure", "label_hi": "उच्च रक्तचाप", "label_kn": "ಅಧಿಕ ರಕ್ತದೊತ್ತಡ"},
+      {"value": "heart_disease", "label_en": "Heart Disease", "label_hi": "हृदय रोग", "label_kn": "ಹೃದಯ ರೋಗ"},
+      {"value": "cancer", "label_en": "Cancer", "label_hi": "कैंसर", "label_kn": "ಕ್ಯಾನ್ಸರ್"},
+      {"value": "stroke", "label_en": "Stroke", "label_hi": "स्ट्रोक", "label_kn": "ಪಾರ್ಶ್ವವಾಯು"},
+      {"value": "none", "label_en": "None known", "label_hi": "कोई ज्ञात नहीं", "label_kn": "ತಿಳಿದಿಲ್ಲ"}
+    ],
+    "translations": {
+      "en": "Does anyone in your immediate family have these conditions?",
+      "hi": "क्या आपके परिवार में किसी को ये स्थितियां हैं?",
+      "kn": "ನಿಮ್ಮ ಕುಟುಂಬದಲ್ಲಿ ಯಾರಿಗಾದರೂ ಈ ಸ್ಥಿತಿಗಳು ಇವೆಯೇ?",
+      "ta": "உங்கள் குடும்பத்தில் யாரேனும் இந்த நிலைகளை கொண்டிருக்கிறார்களா?",
+      "te": "మీ కుటుంబంలో ఎవరైనా ఈ పరిస్థితులు కలిగి ఉన్నారా?"
+    }
+  },
+  {
+    "question_id": "PERSONAL_HISTORY_SMOKING_001",
+    "category": "personal_history",
+    "subcategory": "smoking",
+    "control_type": "single_choice",
+    "input_type": "both",
+    "order_index": 70,
+    "options": [
+      {"value": "never", "label_en": "Never smoked", "label_hi": "कभी नहीं", "label_kn": "ಎಂದಿಗೂ ಇಲ್ಲ"},
+      {"value": "current", "label_en": "Current smoker", "label_hi": "वर्तमान में", "label_kn": "ಈಗ ತಂಬಾಕು ಸೇವಿಸುತ್ತೇನೆ"},
+      {"value": "ex_smoker", "label_en": "Ex-smoker", "label_hi": "पूर्व धूम्रपायी", "label_kn": "ಹಿಂದೆ ತಂಬಾಕು ಸೇವಿಸುತ್ತಿದ್ದೆ"},
+      {"value": "passive", "label_en": "Passive smoker", "label_hi": "निष्क्रिय धूम्रपायी", "label_kn": "ನಿಷ್ಕ್ರಿಯ ಧೂಮ್ರಪಾನ"}
+    ],
+    "translations": {
+      "en": "Do you smoke or use tobacco products?",
+      "hi": "क्या आप धूम्रपान करते हैं या तम्बाकू उत्पादों का उपयोग करते हैं?",
+      "kn": "ನೀವು ಧೂಮ್ರಪಾನ ಮಾಡುತ್ತೀರಾ ಅಥವಾ ತಂಬಾಕು ಉತ್ಪನ್ನಗಳನ್ನು ಬಳಸುತ್ತೀರಾ?",
+      "ta": "புகைப்பிடிக்கிறீர்களா அல்லது புகையிலை பொருட்களை பயன்படுத்துகிறீர்களா?",
+      "te": "మీరు ధూమపానం చేస్తారా లేదా పొగాకు ఉత్పత్తులు ఉపయోగిస్తారా?"
+    }
+  },
+  {
+    "question_id": "PERSONAL_HISTORY_ALCOHOL_001",
+    "category": "personal_history",
+    "subcategory": "alcohol",
+    "control_type": "single_choice",
+    "input_type": "both",
+    "order_index": 71,
+    "options": [
+      {"value": "none", "label_en": "No alcohol", "label_hi": "नहीं", "label_kn": "ಇಲ್ಲ"},
+      {"value": "occasional", "label_en": "Occasionally", "label_hi": "कभी-कभी", "label_kn": "ಕೆಲವೊಮ್ಮೆ"},
+      {"value": "regular", "label_en": "Regularly", "label_hi": "नियमित रूप से", "label_kn": "ನಿಯಮಿತವಾಗಿ"}
+    ],
+    "translations": {
+      "en": "Do you drink alcohol?",
+      "hi": "क्या आप शराब पीते हैं?",
+      "kn": "ನೀವು ಮದ್ಯ ಸೇವಿಸುತ್ತೀರಾ?",
+      "ta": "மது அருந்துகிறீர்களா?",
+      "te": "మీరు మద్యం తాగుతారా?"
+    }
+  }
+]

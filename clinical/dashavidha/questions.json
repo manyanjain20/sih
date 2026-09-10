@@ -1,0 +1,86 @@
+[
+  {
+    "question_id": "DASHA_PRAKRITI_001",
+    "parameter": "prakriti",
+    "control_type": "multiple_choice",
+    "order_index": 1,
+    "options": [
+      {"value": "vata", "label_en": "Vata (Thin, dry skin, quick thinker, anxious)", "label_hi": "वात (पतला, रूखी त्वचा, जल्दी सोचने वाला)", "label_kn": "ವಾತ (ತೆಳ್ಳಗಿನ, ಒಣ ಚರ್ಮ)"},
+      {"value": "pitta", "label_en": "Pitta (Medium build, warm, sharp mind, irritable)", "label_hi": "पित्त (मध्यम निर्माण, गर्म, तीव्र मन)", "label_kn": "ಪಿತ್ತ (ಮಧ್ಯಮ ನಿರ್ಮಾಣ, ಬೆಚ್ಚಗಿನ)"},
+      {"value": "kapha", "label_en": "Kapha (Heavy build, smooth skin, calm, slow)", "label_hi": "कफ (भारी निर्माण, चिकनी त्वचा, शांत)", "label_kn": "ಕಫ (ಭಾರವಾದ ನಿರ್ಮಾಣ, ಮೃದುವಾದ ಚರ್ಮ)"},
+      {"value": "not_sure", "label_en": "Not sure", "label_hi": "निश्चित नहीं", "label_kn": "ಖಚಿತವಿಲ್ಲ"}
+    ],
+    "translations": {
+      "en": "Which of these best describes your natural body type and temperament?",
+      "hi": "इनमें से कौन सा आपके प्राकृतिक शरीर के प्रकार और स्वभाव का सबसे अच्छा वर्णन करता है?",
+      "kn": "ಇವುಗಳಲ್ಲಿ ಯಾವುದು ನಿಮ್ಮ ನೈಸರ್ಗಿಕ ದೇಹ ಪ್ರಕಾರ ಮತ್ತು ಮನೋಭಾವವನ್ನು ಅತ್ಯುತ್ತಮವಾಗಿ ವಿವರಿಸುತ್ತದೆ?"
+    }
+  },
+  {
+    "question_id": "DASHA_SARA_001",
+    "parameter": "sara",
+    "control_type": "single_choice",
+    "order_index": 3,
+    "options": [
+      {"value": "excellent", "label_en": "Excellent — very healthy body tissues", "label_hi": "उत्कृष्ट", "label_kn": "ಅತ್ಯುತ್ತಮ"},
+      {"value": "good", "label_en": "Good", "label_hi": "अच्छा", "label_kn": "ಉತ್ತಮ"},
+      {"value": "average", "label_en": "Average", "label_hi": "औसत", "label_kn": "ಸಾಮಾನ್ಯ"},
+      {"value": "poor", "label_en": "Poor", "label_hi": "खराब", "label_kn": "ಕಳಪೆ"}
+    ],
+    "translations": {
+      "en": "How would you describe the overall quality of your body tissue and vitality?",
+      "hi": "आप अपने शरीर के ऊतकों और जीवन शक्ति की समग्र गुणवत्ता का कैसे वर्णन करेंगे?",
+      "kn": "ನಿಮ್ಮ ದೇಹದ ಅಂಗಾಂಶ ಮತ್ತು ಚೈತನ್ಯದ ಒಟ್ಟಾರೆ ಗುಣಮಟ್ಟವನ್ನು ಹೇಗೆ ವಿವರಿಸುವಿರಿ?"
+    }
+  },
+  {
+    "question_id": "DASHA_AHARA_001",
+    "parameter": "ahara_shakti",
+    "control_type": "single_choice",
+    "order_index": 8,
+    "options": [
+      {"value": "excellent", "label_en": "Excellent appetite, digests well", "label_hi": "उत्कृष्ट भूख, अच्छा पाचन", "label_kn": "ಅದ್ಭುತ ಹಸಿವು"},
+      {"value": "moderate", "label_en": "Moderate appetite", "label_hi": "मध्यम भूख", "label_kn": "ಮಧ್ಯಮ ಹಸಿವು"},
+      {"value": "poor", "label_en": "Poor appetite, often indigestion", "label_hi": "खराब भूख, अक्सर अपच", "label_kn": "ಕಳಪೆ ಹಸಿವು, ಅಜೀರ್ಣ"},
+      {"value": "variable", "label_en": "Variable — changes day to day", "label_hi": "परिवर्तनशील", "label_kn": "ಪರಿವರ್ತನಶೀಲ"}
+    ],
+    "translations": {
+      "en": "How is your appetite and digestion generally?",
+      "hi": "आमतौर पर आपकी भूख और पाचन कैसा है?",
+      "kn": "ಸಾಮಾನ್ಯವಾಗಿ ನಿಮ್ಮ ಹಸಿವು ಮತ್ತು ಜೀರ್ಣಕ್ರಿಯೆ ಹೇಗಿದೆ?"
+    }
+  },
+  {
+    "question_id": "DASHA_VYAYAMA_001",
+    "parameter": "vyayama_shakti",
+    "control_type": "single_choice",
+    "order_index": 9,
+    "options": [
+      {"value": "high", "label_en": "High — can do vigorous exercise", "label_hi": "उच्च", "label_kn": "ಉಚ್ಚ"},
+      {"value": "moderate", "label_en": "Moderate — moderate activity", "label_hi": "मध्यम", "label_kn": "ಮಧ್ಯಮ"},
+      {"value": "low", "label_en": "Low — gets tired quickly", "label_hi": "कम", "label_kn": "ಕಡಿಮೆ"},
+      {"value": "very_low", "label_en": "Very low — minimal activity possible", "label_hi": "बहुत कम", "label_kn": "ತುಂಬಾ ಕಡಿಮೆ"}
+    ],
+    "translations": {
+      "en": "What is your physical exercise capacity or stamina?",
+      "hi": "आपकी शारीरिक व्यायाम क्षमता या सहनशक्ति क्या है?",
+      "kn": "ನಿಮ್ಮ ದೈಹಿಕ ವ್ಯಾಯಾಮ ಸಾಮರ್ಥ್ಯ ಅಥವಾ ಸ್ಟಾಮಿನಾ ಏನು?"
+    }
+  },
+  {
+    "question_id": "DASHA_SATTVA_001",
+    "parameter": "sattva",
+    "control_type": "single_choice",
+    "order_index": 7,
+    "options": [
+      {"value": "sattvic", "label_en": "Calm, clear-minded, positive", "label_hi": "शांत, स्पष्ट मन, सकारात्मक", "label_kn": "ಶಾಂತ, ಸ್ಪಷ್ಟ ಮನಸ್ಸು"},
+      {"value": "rajasic", "label_en": "Active, passionate, sometimes stressed", "label_hi": "सक्रिय, भावुक, कभी-कभी तनावग्रस्त", "label_kn": "ಸಕ್ರಿಯ, ಉತ್ಸಾಹಿ"},
+      {"value": "tamasic", "label_en": "Dull, lethargic, often confused", "label_hi": "उदासीन, सुस्त, अक्सर भ्रमित", "label_kn": "ನಿಸ್ತೇಜ, ಸೋಮಾರಿ"}
+    ],
+    "translations": {
+      "en": "How would you describe your mental state most of the time?",
+      "hi": "अधिकांश समय आपकी मानसिक स्थिति कैसी होती है?",
+      "kn": "ಹೆಚ್ಚಿನ ಸಮಯ ನಿಮ್ಮ ಮಾನಸಿಕ ಸ್ಥಿತಿಯನ್ನು ಹೇಗೆ ವಿವರಿಸುವಿರಿ?"
+    }
+  }
+]

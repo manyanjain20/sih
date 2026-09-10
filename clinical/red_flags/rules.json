@@ -1,0 +1,164 @@
+{
+  "version": "1.0",
+  "description": "MediKiosk Red Flag Rules — Rule-based engine. Rules are evaluated against session symptom data. Each rule that fires sets the session priority to the rule severity (highest wins).",
+  "rules": [
+    {
+      "rule_id": "RF_CARDIAC_001",
+      "rule_name": "Possible Acute Coronary Syndrome",
+      "severity": "high",
+      "description": "Chest pain with shortness of breath or sweating suggests possible cardiac emergency.",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {"field": "symptoms", "contains": "chest_pain"},
+          {
+            "operator": "OR",
+            "checks": [
+              {"field": "symptoms", "contains": "shortness_of_breath"},
+              {"field": "symptoms", "contains": "sweating"},
+              {"field": "symptoms", "contains": "palpitations"}
+            ]
+          }
+        ]
+      },
+      "recommendation": "Immediate clinical evaluation required.",
+      "alert_triage": true
+    },
+    {
+      "rule_id": "RF_CARDIAC_002",
+      "rule_name": "Chest Pain with Radiation",
+      "severity": "high",
+      "description": "Chest pain radiating to arm, jaw, or back is a classic indicator of cardiac event.",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {"field": "symptoms", "contains": "chest_pain"},
+          {"field": "radiation", "any_of": ["left_arm", "jaw", "back", "shoulder"]}
+        ]
+      },
+      "recommendation": "Urgent cardiac evaluation required.",
+      "alert_triage": true
+    },
+    {
+      "rule_id": "RF_NEURO_001",
+      "rule_name": "Possible Stroke",
+      "severity": "high",
+      "description": "Sudden severe headache, facial drooping, arm weakness, or speech difficulty.",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "operator": "AND",
+            "checks": [
+              {"field": "symptoms", "contains": "headache"},
+              {"field": "timing", "equals": "sudden"}
+            ]
+          },
+          {"field": "symptoms", "contains": "dizziness"},
+          {"field": "symptoms", "contains": "facial_drooping"},
+          {"field": "symptoms", "contains": "speech_difficulty"}
+        ]
+      },
+      "recommendation": "Immediate neurological evaluation required.",
+      "alert_triage": true
+    },
+    {
+      "rule_id": "RF_RESP_001",
+      "rule_name": "Severe Respiratory Distress",
+      "severity": "high",
+      "description": "Severe shortness of breath at rest suggests acute respiratory emergency.",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {"field": "symptoms", "contains": "shortness_of_breath"},
+          {"field": "severity", "greater_than": 7}
+        ]
+      },
+      "recommendation": "Immediate respiratory evaluation required.",
+      "alert_triage": true
+    },
+    {
+      "rule_id": "RF_ABDO_001",
+      "rule_name": "Acute Abdomen",
+      "severity": "high",
+      "description": "Severe abdominal pain with vomiting and high severity score.",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {"field": "symptoms", "contains": "abdominal_pain"},
+          {"field": "symptoms", "contains": "nausea"},
+          {"field": "severity", "greater_than": 7}
+        ]
+      },
+      "recommendation": "Urgent surgical evaluation required.",
+      "alert_triage": true
+    },
+    {
+      "rule_id": "RF_FEVER_001",
+      "rule_name": "High Fever with Neurological Symptoms",
+      "severity": "high",
+      "description": "High fever with altered consciousness or neck stiffness suggests meningitis.",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {"field": "symptoms", "contains": "fever"},
+          {
+            "operator": "OR",
+            "checks": [
+              {"field": "symptoms", "contains": "headache"},
+              {"field": "symptoms", "contains": "dizziness"}
+            ]
+          }
+        ]
+      },
+      "recommendation": "Urgent neurological evaluation required.",
+      "alert_triage": true
+    },
+    {
+      "rule_id": "RF_SYNCOPE_001",
+      "rule_name": "Syncope / Fainting",
+      "severity": "medium",
+      "description": "Patient reports fainting or loss of consciousness.",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {"field": "symptoms", "contains": "dizziness"},
+          {"field": "chief_complaint", "contains_text": "faint"},
+          {"field": "chief_complaint", "contains_text": "unconscious"},
+          {"field": "chief_complaint", "contains_text": "blackout"}
+        ]
+      },
+      "recommendation": "Clinical evaluation for syncope required.",
+      "alert_triage": false
+    },
+    {
+      "rule_id": "RF_ALLERGY_001",
+      "rule_name": "Possible Anaphylaxis",
+      "severity": "high",
+      "description": "Rash with breathing difficulty after possible allergen exposure.",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {"field": "symptoms", "contains": "shortness_of_breath"},
+          {"field": "chief_complaint", "contains_text": "rash"}
+        ]
+      },
+      "recommendation": "Possible anaphylaxis — immediate evaluation required.",
+      "alert_triage": true
+    },
+    {
+      "rule_id": "RF_PAIN_001",
+      "rule_name": "Severe Uncontrolled Pain",
+      "severity": "medium",
+      "description": "Patient reports pain severity 9 or 10.",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {"field": "severity", "greater_than": 8}
+        ]
+      },
+      "recommendation": "Prioritize pain assessment and management.",
+      "alert_triage": false
+    }
+  ]
+}
