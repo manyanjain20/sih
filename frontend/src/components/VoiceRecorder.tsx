@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Mic, MicOff, AlertCircle, RefreshCw, Keyboard, Check, Volume2 } from "lucide-react";
+import { Mic, MicOff, AlertCircle, RefreshCw, Keyboard, Check, Volume2, Sparkles } from "lucide-react";
 
 export type VoiceState = "idle" | "listening" | "processing" | "followup" | "error";
 
@@ -18,10 +18,10 @@ export default function VoiceRecorder({
   questionNumberText = "1 question answered",
   onAnswerReceived,
   touchOptions = [
-    { label: "Chest", value: "Chest" },
-    { label: "Head", value: "Head" },
-    { label: "Stomach", value: "Stomach" },
-    { label: "Back", value: "Back" },
+    { label: "Chest (सीने में)", value: "Chest" },
+    { label: "Head (सिर में)", value: "Head" },
+    { label: "Stomach (पेट में)", value: "Stomach" },
+    { label: "Back (पीठ में)", value: "Back" },
     { label: "Other", value: "Other location" },
   ],
   placeholderText = "Speak naturally about what you are feeling...",
@@ -29,7 +29,7 @@ export default function VoiceRecorder({
   const [state, setState] = useState<VoiceState>("idle");
   const [typedText, setTypedText] = useState("");
   const [showTypeInput, setShowTypeInput] = useState(false);
-  const [simulatedVolume, setSimulatedVolume] = useState([20, 35, 60, 45, 25]);
+  const [simulatedVolume, setSimulatedVolume] = useState([25, 45, 75, 55, 30, 60, 40]);
 
   // Audio waveform animation when listening
   useEffect(() => {
@@ -37,13 +37,15 @@ export default function VoiceRecorder({
     if (state === "listening") {
       interval = setInterval(() => {
         setSimulatedVolume([
-          Math.floor(15 + Math.random() * 50),
-          Math.floor(25 + Math.random() * 65),
-          Math.floor(35 + Math.random() * 55),
-          Math.floor(20 + Math.random() * 70),
-          Math.floor(15 + Math.random() * 45),
+          Math.floor(20 + Math.random() * 50),
+          Math.floor(30 + Math.random() * 65),
+          Math.floor(45 + Math.random() * 55),
+          Math.floor(25 + Math.random() * 70),
+          Math.floor(40 + Math.random() * 60),
+          Math.floor(30 + Math.random() * 50),
+          Math.floor(20 + Math.random() * 45),
         ]);
-      }, 120);
+      }, 100);
     }
     return () => clearInterval(interval);
   }, [state]);
@@ -57,7 +59,7 @@ export default function VoiceRecorder({
         setTimeout(() => {
           setState("idle");
           onAnswerReceived("Severe discomfort in central chest radiating to arm");
-        }, 1500);
+        }, 1400);
       }, 3500);
     } else if (state === "listening") {
       setState("processing");
@@ -83,22 +85,36 @@ export default function VoiceRecorder({
   return (
     <div className="w-full max-w-2xl mx-auto flex flex-col items-center text-center">
       {/* Question Card */}
-      <div className="w-full mb-8">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug">
+      <div className="w-full mb-6">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-snug">
           {questionText}
         </h2>
         <p className="mt-2 text-base text-slate-500 font-medium">
-          Speak your answer in your own words, or select one of the choices below.
+          Speak your answer naturally in your mother tongue, or select one of the quick options below.
         </p>
       </div>
 
-      {/* Voice State Visualizer */}
-      <div className="flex flex-col items-center justify-center my-6">
+      {/* Voice State Visualizer & Ripple Rings */}
+      <div className="flex flex-col items-center justify-center my-6 relative">
+        {/* Pulsing ripples during listening */}
+        {state === "listening" && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <span className="w-36 h-36 rounded-full bg-red-500/15 animate-ping duration-1000"></span>
+            <span className="w-48 h-48 rounded-full bg-red-500/10 animate-pulse"></span>
+          </div>
+        )}
+
         <button
           type="button"
           onClick={handleMicClick}
           aria-label="Microphone"
-          className={`kiosk-voice-circle ${state === "listening" ? "listening" : state === "processing" ? "processing" : ""}`}
+          className={`relative z-10 w-32 h-32 rounded-full flex flex-col items-center justify-center cursor-pointer transition-all duration-300 shadow-xl ${
+            state === "listening"
+              ? "bg-red-50 border-4 border-red-500 text-red-600 scale-105"
+              : state === "processing"
+              ? "bg-teal-50 border-4 border-teal-500 text-teal-600 scale-100"
+              : "bg-gradient-to-br from-teal-50 to-teal-100/70 border-4 border-teal-600 text-teal-700 hover:scale-105 hover:shadow-2xl"
+          }`}
         >
           {state === "listening" ? (
             <Mic className="w-12 h-12 animate-pulse text-red-600" />
@@ -110,18 +126,23 @@ export default function VoiceRecorder({
         </button>
 
         {/* State Label */}
-        <div className="mt-4 min-h-[32px] flex items-center justify-center">
+        <div className="mt-5 min-h-[32px] flex items-center justify-center">
           {state === "idle" && (
-            <span className="text-lg font-bold text-slate-700">Tap the microphone to answer</span>
+            <span className="text-base sm:text-lg font-bold text-slate-700">
+              Tap the microphone to speak
+            </span>
           )}
           {state === "listening" && (
-            <div className="flex items-center gap-2 text-lg font-bold text-red-600">
+            <div className="flex items-center gap-2 text-base sm:text-lg font-black text-red-600">
               <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
-              Listening...
+              Listening... Speak in Hindi, English, Kannada or Tamil
             </div>
           )}
           {state === "processing" && (
-            <span className="text-lg font-bold text-teal-700">Understanding your answer...</span>
+            <div className="flex items-center gap-2 text-base sm:text-lg font-bold text-teal-700">
+              <Sparkles className="w-4 h-4 text-teal-600 animate-spin" />
+              Structuring clinical response with AI...
+            </div>
           )}
           {state === "error" && (
             <div className="flex items-center gap-1.5 text-base font-semibold text-amber-700">
@@ -131,9 +152,9 @@ export default function VoiceRecorder({
           )}
         </div>
 
-        {/* Subtle Waveform Animation while listening */}
+        {/* Dynamic Waveform Visualizer */}
         {state === "listening" && (
-          <div className="flex items-center gap-1.5 h-8 mt-2">
+          <div className="flex items-center gap-1.5 h-10 mt-3 px-4 py-2 rounded-full bg-red-50 border border-red-200">
             {simulatedVolume.map((vol, idx) => (
               <div
                 key={idx}
@@ -169,17 +190,17 @@ export default function VoiceRecorder({
           <button
             type="button"
             onClick={() => setShowTypeInput(true)}
-            className="mt-4 text-sm font-semibold text-slate-500 hover:text-teal-700 flex items-center gap-1.5 py-1 px-3 rounded-lg hover:bg-slate-100 transition-colors"
+            className="mt-4 text-xs font-semibold text-slate-500 hover:text-teal-700 flex items-center gap-1.5 py-1.5 px-3.5 rounded-xl hover:bg-slate-100 transition-colors border border-transparent hover:border-slate-200"
           >
             <Keyboard className="w-4 h-4" />
-            Type instead
+            Prefer to type? Click here
           </button>
         )}
       </div>
 
       {/* Manual Typing Form */}
       {showTypeInput && (
-        <form onSubmit={handleTypedSubmit} className="w-full max-w-lg mb-8 animate-fadeIn">
+        <form onSubmit={handleTypedSubmit} className="w-full max-w-lg mb-8">
           <div className="flex gap-2">
             <input
               type="text"
@@ -199,10 +220,10 @@ export default function VoiceRecorder({
         </form>
       )}
 
-      {/* Touch Fallback: Choose an answer */}
+      {/* Touch Fallback: Choose an answer with dual language labels */}
       <div className="w-full mt-4 pt-6 border-t border-slate-200/80">
-        <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 text-left sm:text-center">
-          Or choose an answer:
+        <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 text-center">
+          Or tap your answer directly:
         </div>
         <div className="flex flex-wrap items-center justify-center gap-2.5">
           {touchOptions.map((opt) => (
@@ -210,7 +231,7 @@ export default function VoiceRecorder({
               key={opt.value}
               type="button"
               onClick={() => handleTouchOption(opt)}
-              className="px-5 py-3 rounded-xl border border-slate-200 bg-white hover:border-teal-600 hover:bg-teal-50 text-slate-800 text-base font-semibold transition-all shadow-xs min-h-[48px]"
+              className="px-5 py-3 rounded-2xl border border-slate-200 bg-white hover:border-teal-600 hover:bg-teal-50 text-slate-800 text-base font-semibold transition-all shadow-xs hover:shadow-md hover:scale-[1.02] min-h-[52px]"
             >
               {opt.label}
             </button>

@@ -17,7 +17,8 @@ import {
   Terminal,
   Activity,
   CheckCircle2,
-  Trash2
+  Trash2,
+  Sparkles
 } from "lucide-react";
 import { hospitalEventBus, HospitalEvent } from "@/lib/events";
 
@@ -38,7 +39,7 @@ export default function LiveEventDock() {
       setEvents((prev) => [event, ...prev].slice(0, 50));
 
       setIsFlashing(true);
-      setTimeout(() => setIsFlashing(false), 800);
+      setTimeout(() => setIsFlashing(false), 900);
     });
 
     return () => {
@@ -135,31 +136,32 @@ export default function LiveEventDock() {
   };
 
   return (
-    <aside aria-label="Event-Driven Operations Bus" className="fixed bottom-3 right-3 sm:right-6 z-50 max-w-xl w-full px-2 sm:px-0">
+    <aside aria-label="Event-Driven Operations Bus" className="fixed bottom-4 right-4 sm:right-6 z-50 max-w-xl w-full px-2 sm:px-0">
       {/* Floating Header Pill */}
       <div
         className={`flex items-center justify-between gap-3 px-4 py-2.5 rounded-2xl border transition-all duration-300 shadow-2xl backdrop-blur-2xl ${
           isFlashing
-            ? "bg-cyan-950/90 border-cyan-400 shadow-cyan-500/30 scale-[1.01]"
-            : "bg-[#081728]/90 border-slate-700/70 hover:border-slate-600"
+            ? "bg-teal-950/90 border-teal-400 shadow-teal-500/40 scale-[1.02]"
+            : "bg-[#080d1a]/90 border-white/15 hover:border-teal-500/50"
         }`}
       >
         {/* Left Status & Ticker */}
         <div
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2.5 flex-1 cursor-pointer overflow-hidden"
+          className="flex items-center gap-2.5 flex-1 cursor-pointer overflow-hidden group"
         >
-          <div className="relative shrink-0">
-            <Radio className="w-4 h-4 text-cyan-400 animate-pulse" />
-            <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-400"></span>
+          <div className="relative shrink-0 flex items-center justify-center">
+            <Radio className="w-4 h-4 text-teal-400 animate-pulse" />
+            <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
           </div>
 
           <div className="flex flex-col truncate">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] uppercase font-black tracking-widest text-cyan-300">
-                EVENT BUS
+              <span className="text-[10px] uppercase font-black tracking-widest text-teal-300 flex items-center gap-1">
+                TELEMETRY BUS
+                <Sparkles className="w-2.5 h-2.5 text-amber-400" />
               </span>
-              <span className="px-1.5 py-0.2 rounded-full bg-cyan-500/20 text-cyan-300 text-[9px] font-mono font-bold">
+              <span className="px-1.5 py-0.2 rounded-full bg-teal-500/20 text-teal-300 text-[9px] font-mono font-bold border border-teal-500/30">
                 {events.length} Events
               </span>
             </div>
@@ -176,32 +178,32 @@ export default function LiveEventDock() {
           <button
             type="button"
             onClick={toggleMute}
-            className="p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-all"
+            className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 transition-all border border-white/5"
             title={isMuted ? "Unmute Hospital Chimes" : "Mute Sound"}
           >
-            {isMuted ? <VolumeX className="w-3.5 h-3.5 text-red-400" /> : <Volume2 className="w-3.5 h-3.5 text-cyan-400" />}
+            {isMuted ? <VolumeX className="w-3.5 h-3.5 text-red-400" /> : <Volume2 className="w-3.5 h-3.5 text-teal-400" />}
           </button>
 
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-all"
+            className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 transition-all border border-white/5"
             title="Toggle Event Drawer"
           >
-            {isOpen ? <ChevronDown className="w-4 h-4" /> : <ChevronUp className="w-4 h-4" />}
+            {isOpen ? <ChevronDown className="w-4 h-4 text-teal-400" /> : <ChevronUp className="w-4 h-4" />}
           </button>
         </div>
       </div>
 
       {/* Expanded Event Drawer */}
       {isOpen && (
-        <div className="mt-2 p-4 rounded-3xl bg-[#071322]/95 border border-cyan-500/30 shadow-2xl backdrop-blur-3xl space-y-4 max-h-[520px] overflow-hidden flex flex-col">
+        <div className="mt-2.5 p-4 rounded-3xl bg-[#080d1a]/95 border border-teal-500/30 shadow-2xl backdrop-blur-3xl space-y-4 max-h-[520px] overflow-hidden flex flex-col">
           {/* Quick Simulation Trigger Buttons */}
-          <div className="space-y-2 pb-3 border-b border-slate-800">
+          <div className="space-y-2 pb-3 border-b border-white/10">
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
                 <Zap className="w-3 h-3 text-amber-400" />
-                Live Event Injector (Click to test event bus):
+                Live Telemetry Injector (Interactive Evaluation):
               </span>
             </div>
 
@@ -209,7 +211,7 @@ export default function LiveEventDock() {
               <button
                 type="button"
                 onClick={triggerEmergencyACS}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-red-950/60 hover:bg-red-900/60 border border-red-500/40 text-red-300 text-[10px] font-bold transition-all text-left truncate"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-red-950/60 hover:bg-red-900/60 border border-red-500/40 text-red-300 text-[10px] font-bold transition-all text-left truncate shadow-sm hover:scale-[1.02]"
               >
                 <AlertTriangle className="w-3 h-3 text-red-400 shrink-0" />
                 <span>🚨 Trigger ACS Alarm</span>
@@ -218,7 +220,7 @@ export default function LiveEventDock() {
               <button
                 type="button"
                 onClick={triggerCallPatient}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-teal-950/60 hover:bg-teal-900/60 border border-teal-500/40 text-teal-300 text-[10px] font-bold transition-all text-left truncate"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-teal-950/60 hover:bg-teal-900/60 border border-teal-500/40 text-teal-300 text-[10px] font-bold transition-all text-left truncate shadow-sm hover:scale-[1.02]"
               >
                 <BellRing className="w-3 h-3 text-teal-400 shrink-0" />
                 <span>📢 Call Token OPD-042</span>
@@ -227,7 +229,7 @@ export default function LiveEventDock() {
               <button
                 type="button"
                 onClick={triggerOCRStream}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-cyan-950/60 hover:bg-cyan-900/60 border border-cyan-500/40 text-cyan-300 text-[10px] font-bold transition-all text-left truncate"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-cyan-950/60 hover:bg-cyan-900/60 border border-cyan-500/40 text-cyan-300 text-[10px] font-bold transition-all text-left truncate shadow-sm hover:scale-[1.02]"
               >
                 <FileText className="w-3 h-3 text-cyan-400 shrink-0" />
                 <span>📄 Stream Rx OCR</span>
@@ -236,16 +238,16 @@ export default function LiveEventDock() {
               <button
                 type="button"
                 onClick={triggerTachycardiaVitals}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-amber-950/60 hover:bg-amber-900/60 border border-amber-500/40 text-amber-300 text-[10px] font-bold transition-all text-left truncate"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-950/60 hover:bg-amber-900/60 border border-amber-500/40 text-amber-300 text-[10px] font-bold transition-all text-left truncate shadow-sm hover:scale-[1.02]"
               >
                 <Heart className="w-3 h-3 text-amber-400 shrink-0" />
-                <span>💓 Vitals Spike (HR 148)</span>
+                <span>💓 Tachycardia (HR 148)</span>
               </button>
 
               <button
                 type="button"
                 onClick={triggerCodeBlue}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-indigo-950/60 hover:bg-indigo-900/60 border border-indigo-500/40 text-indigo-300 text-[10px] font-bold transition-all text-left truncate"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-950/60 hover:bg-indigo-900/60 border border-indigo-500/40 text-indigo-300 text-[10px] font-bold transition-all text-left truncate shadow-sm hover:scale-[1.02]"
               >
                 <ShieldAlert className="w-3 h-3 text-indigo-400 shrink-0" />
                 <span>⚡ Code Blue Broadcast</span>
@@ -254,7 +256,7 @@ export default function LiveEventDock() {
               <button
                 type="button"
                 onClick={clearHistory}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-white text-[10px] font-bold transition-all text-left truncate"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-white text-[10px] font-bold transition-all text-left truncate shadow-sm"
               >
                 <Trash2 className="w-3 h-3 shrink-0" />
                 <span>Clear History</span>
@@ -263,10 +265,10 @@ export default function LiveEventDock() {
           </div>
 
           {/* Rolling Event Stream List */}
-          <div className="flex-1 overflow-y-auto space-y-2 pr-1 max-h-[300px]">
-            <div className="flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase pb-1">
-              <span>Event Stream ({events.length})</span>
-              <span>Actor</span>
+          <div className="flex-1 overflow-y-auto space-y-2 pr-1 max-h-[290px] custom-scrollbar-dark">
+            <div className="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase pb-1">
+              <span>Real-Time Stream ({events.length})</span>
+              <span>Actor & Severity</span>
             </div>
 
             {events.length === 0 ? (
@@ -277,12 +279,12 @@ export default function LiveEventDock() {
               events.map((evt) => (
                 <div
                   key={evt.id}
-                  className={`p-2.5 rounded-xl border text-xs font-mono transition-all ${
+                  className={`p-3 rounded-xl border text-xs font-mono transition-all ${
                     evt.severity === "CRITICAL"
-                      ? "bg-red-950/50 border-red-500/40 text-red-200"
+                      ? "bg-red-950/50 border-red-500/40 text-red-200 shadow-red-950/20 shadow-md"
                       : evt.severity === "WARNING"
                       ? "bg-amber-950/40 border-amber-500/40 text-amber-200"
-                      : "bg-slate-950/60 border-slate-800/80 text-slate-300"
+                      : "bg-[#0b1220]/70 border-white/10 text-slate-300"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
@@ -292,16 +294,20 @@ export default function LiveEventDock() {
                       </span>
                       <span className="font-bold text-white truncate">{evt.type}</span>
                     </div>
-                    <span className="px-1.5 py-0.5 rounded bg-slate-900 text-[9px] font-bold text-cyan-400 border border-slate-700 shrink-0">
+                    <span className={`px-2 py-0.5 rounded text-[9px] font-bold border shrink-0 ${
+                      evt.severity === "CRITICAL"
+                        ? "bg-red-900/60 text-red-300 border-red-500/40"
+                        : "bg-white/5 text-teal-400 border-teal-500/30"
+                    }`}>
                       {evt.actor}
                     </span>
                   </div>
 
                   {evt.payload && (
-                    <div className="mt-1 text-[11px] text-slate-400 truncate opacity-90">
+                    <div className="mt-1.5 text-[11px] text-slate-400 truncate opacity-90">
                       {typeof evt.payload === "string"
                         ? evt.payload
-                        : JSON.stringify(evt.payload).substring(0, 85) + "..."}
+                        : JSON.stringify(evt.payload).substring(0, 95) + "..."}
                     </div>
                   )}
                 </div>

@@ -27,7 +27,9 @@ import {
   Printer,
   ChevronRight,
   ShieldAlert,
-  Edit3
+  Edit3,
+  CheckCheck,
+  RotateCcw
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import LanguageModal, { ALL_INDIAN_LANGUAGES } from "@/components/LanguageModal";
@@ -109,9 +111,9 @@ export default function PatientKioskPage() {
       title: "Body Constitution (Prakriti)",
       subtitle: "How would you describe your natural physical build and energy?",
       choices: [
-        { label: "Slender / Active / Variable appetite (Vata)", value: "Vata" },
-        { label: "Medium build / Sharp appetite / Sensitive to heat (Pitta)", value: "Pitta" },
-        { label: "Broad build / Calm temperament / Steady stamina (Kapha)", value: "Kapha" },
+        { label: "Slender / Active / Variable appetite (Vata - वात)", value: "Vata" },
+        { label: "Medium build / Sharp appetite / Sensitive to heat (Pitta - पित्त)", value: "Pitta" },
+        { label: "Broad build / Calm temperament / Steady stamina (Kapha - कफ)", value: "Kapha" },
       ],
     },
     {
@@ -222,12 +224,43 @@ export default function PatientKioskPage() {
     }
   };
 
+  const stepLabels = [
+    "Welcome",
+    "Identification",
+    "Consent",
+    "Voice Intake",
+    "Symptoms",
+    "AYUSH",
+    "Documents",
+    "Review",
+    "Token",
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-teal-500/20 selection:text-teal-900">
       <Navbar />
 
       {/* Main Kiosk Viewport */}
-      <main className="flex-1 pt-24 pb-16 px-4 sm:px-8 max-w-5xl mx-auto w-full flex flex-col justify-center">
+      <main className="flex-1 pt-24 pb-20 px-4 sm:px-8 max-w-5xl mx-auto w-full flex flex-col justify-center">
+        {/* Top Step Progress Bar for Steps 2 to 8 */}
+        {currentStep > 1 && currentStep < 9 && (
+          <div className="mb-6 bg-white rounded-2xl p-4 border border-slate-200 shadow-xs">
+            <div className="flex items-center justify-between text-xs font-bold text-slate-500 mb-2">
+              <span className="text-teal-800 uppercase tracking-wider flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-teal-600"></span>
+                Step {currentStep} of 8: {stepLabels[currentStep - 1]}
+              </span>
+              <span>{Math.round((currentStep / 8) * 100)}% Completed</span>
+            </div>
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div
+                className="bg-gradient-to-r from-teal-600 to-emerald-500 h-full rounded-full transition-all duration-300"
+                style={{ width: `${(currentStep / 8) * 100}%` }}
+              />
+            </div>
+          </div>
+        )}
+
         {/* =========================================================================
             SCREEN 1: PATIENT WELCOME
            ========================================================================= */}
@@ -237,15 +270,15 @@ export default function PatientKioskPage() {
               {/* Left Column: Greeting & Primary Actions */}
               <div className="lg:col-span-7 space-y-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-teal-700 text-white flex items-center justify-center shadow-sm">
+                  <div className="w-12 h-12 rounded-2xl bg-teal-700 text-white flex items-center justify-center shadow-md">
                     <Activity className="w-6 h-6" />
                   </div>
                   <div>
                     <span className="text-xl font-black text-slate-900 tracking-tight block">
-                      MediKiosk
+                      MediKiosk OPD
                     </span>
-                    <span className="text-xs font-semibold text-teal-800 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200">
-                      Outpatient Self-Service Intake
+                    <span className="text-xs font-semibold text-teal-800 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200">
+                      Outpatient Self-Service Desk
                     </span>
                   </div>
                 </div>
@@ -255,7 +288,7 @@ export default function PatientKioskPage() {
                     Your consultation starts here.
                   </h1>
                   <p className="text-lg sm:text-xl text-slate-600 font-medium mt-3 leading-relaxed">
-                    Tell us about your health before meeting your doctor.
+                    Tell us about your symptoms in your preferred language before meeting your doctor.
                   </p>
                 </div>
 
@@ -291,7 +324,7 @@ export default function PatientKioskPage() {
                       className="text-xs font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1"
                     >
                       <Globe className="w-3.5 h-3.5" />
-                      More languages
+                      All 13 Indian languages
                     </button>
                   </div>
 
@@ -327,17 +360,17 @@ export default function PatientKioskPage() {
               </div>
 
               {/* Right Column: Friendly Healthcare Visual Card */}
-              <div className="lg:col-span-5 flex flex-col items-center justify-center p-8 bg-teal-50/50 rounded-3xl border border-teal-100 text-center">
-                <div className="w-24 h-24 rounded-full bg-teal-700 text-white flex items-center justify-center shadow-md mb-6">
+              <div className="lg:col-span-5 flex flex-col items-center justify-center p-8 bg-gradient-to-b from-teal-50/70 to-emerald-50/40 rounded-3xl border border-teal-100 text-center shadow-xs">
+                <div className="w-24 h-24 rounded-full bg-teal-700 text-white flex items-center justify-center shadow-lg shadow-teal-700/20 mb-6">
                   <Mic className="w-10 h-10" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-2">Speak or Touch</h3>
                 <p className="text-sm text-slate-600 leading-relaxed max-w-xs">
-                  Speak in your preferred regional language. The kiosk will prepare a clean summary for your consulting doctor.
+                  Speak naturally in Hindi, English, Kannada or Tamil. The kiosk prepares an instant structured clinical summary for your consulting doctor.
                 </p>
-                <div className="mt-6 flex items-center gap-2 text-xs font-bold text-teal-800 bg-white px-3 py-1.5 rounded-full border border-teal-200 shadow-xs">
+                <div className="mt-6 flex items-center gap-2 text-xs font-bold text-teal-800 bg-white px-3.5 py-1.5 rounded-full border border-teal-200 shadow-xs">
                   <CheckCircle2 className="w-4 h-4 text-teal-600" />
-                  Average intake takes ~3 minutes
+                  Average intake takes ~3.8 minutes
                 </div>
               </div>
             </div>
@@ -362,21 +395,21 @@ export default function PatientKioskPage() {
             {/* 3 Large Clean Options */}
             <div className="grid grid-cols-3 gap-3 mb-6">
               {[
-                { id: "mobile", label: "Mobile", icon: Smartphone },
-                { id: "abha", label: "ABHA ID", icon: QrCode },
+                { id: "mobile", label: "Mobile OTP", icon: Smartphone },
+                { id: "abha", label: "ABHA Card", icon: QrCode },
                 { id: "new", label: "New Patient", icon: User },
               ].map((item) => (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => setAuthMethod(item.id as any)}
-                  className={`p-4 rounded-2xl border-2 flex flex-col items-center justify-center gap-2 transition-all min-h-[80px] ${
+                  className={`p-4 rounded-2xl border-2 flex flex-col items-center justify-center gap-2 transition-all min-h-[90px] ${
                     authMethod === item.id
-                      ? "border-teal-700 bg-teal-50 text-teal-900 font-bold"
+                      ? "border-teal-700 bg-teal-50 text-teal-900 font-bold shadow-xs"
                       : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 font-medium"
                   }`}
                 >
-                  <item.icon className="w-5 h-5 text-teal-700" />
+                  <item.icon className="w-6 h-6 text-teal-700" />
                   <span className="text-xs">{item.label}</span>
                 </button>
               ))}
@@ -412,7 +445,7 @@ export default function PatientKioskPage() {
                   <input
                     type="text"
                     defaultValue="91-2345-6789-0123"
-                    className="w-full px-4 py-3.5 rounded-2xl border-2 border-slate-300 focus:border-teal-600 outline-none text-base font-bold text-slate-900 bg-white"
+                    className="w-full px-4 py-3.5 rounded-2xl border-2 border-slate-300 focus:border-teal-600 outline-none text-base font-bold text-slate-900 bg-white font-mono"
                     placeholder="e.g. 14-digit ABHA number"
                   />
                 </div>
@@ -481,7 +514,7 @@ export default function PatientKioskPage() {
         {currentStep === 3 && (
           <section className="kiosk-card p-8 sm:p-12 max-w-xl mx-auto w-full">
             <div className="text-center mb-6">
-              <div className="w-16 h-16 rounded-2xl bg-teal-50 text-teal-700 flex items-center justify-center mx-auto mb-4 border border-teal-200">
+              <div className="w-16 h-16 rounded-2xl bg-teal-50 text-teal-700 flex items-center justify-center mx-auto mb-4 border border-teal-200 shadow-sm">
                 <ShieldCheck className="w-8 h-8" />
               </div>
               <h2 className="text-3xl font-extrabold text-slate-900">Before we begin</h2>
@@ -534,7 +567,7 @@ export default function PatientKioskPage() {
         )}
 
         {/* =========================================================================
-            SCREEN 4 & 5: AI CONVERSATION & ACTIVE VOICE STATE
+            SCREEN 4: AI CONVERSATION & ACTIVE VOICE STATE
            ========================================================================= */}
         {currentStep === 4 && (
           <section className="kiosk-card p-8 sm:p-12 w-full max-w-3xl mx-auto">
@@ -547,7 +580,7 @@ export default function PatientKioskPage() {
               </div>
               <div className="flex items-center gap-3 text-xs font-semibold text-slate-500">
                 <span>Session: Active</span>
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
               </div>
             </div>
 
@@ -597,13 +630,13 @@ export default function PatientKioskPage() {
         )}
 
         {/* =========================================================================
-            SCREEN 6: NATURAL SOCRATES PAIN QUESTIONS
+            SCREEN 5: NATURAL SOCRATES PAIN QUESTIONS
            ========================================================================= */}
         {currentStep === 5 && (
           <section className="kiosk-card p-8 sm:p-12 w-full max-w-3xl mx-auto space-y-8">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
-                Understanding Your Symptoms
+                SOCRATES Clinical Protocol
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mt-2">
                 Tell us more about how you are feeling
@@ -615,7 +648,7 @@ export default function PatientKioskPage() {
               <label className="text-base font-bold text-slate-900 block">
                 Where does the pain or discomfort occur?
               </label>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {[
                   "Central Chest",
                   "Upper Abdomen",
@@ -626,7 +659,7 @@ export default function PatientKioskPage() {
                     key={site}
                     type="button"
                     onClick={() => setPainSite(site)}
-                    className={`p-3.5 rounded-xl border text-sm font-bold text-left transition-all ${
+                    className={`p-4 rounded-2xl border-2 text-sm font-bold text-left transition-all ${
                       painSite === site
                         ? "border-teal-700 bg-teal-50 text-teal-900 shadow-xs"
                         : "border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
@@ -643,7 +676,7 @@ export default function PatientKioskPage() {
               <label className="text-base font-bold text-slate-900 block">
                 What does the pain feel like?
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
                   "Crushing / Tight pressure",
                   "Burning / Acid sensation",
@@ -655,7 +688,7 @@ export default function PatientKioskPage() {
                     key={char}
                     type="button"
                     onClick={() => setPainCharacter(char)}
-                    className={`p-3.5 rounded-xl border text-sm font-bold text-left transition-all ${
+                    className={`p-4 rounded-2xl border-2 text-sm font-bold text-left transition-all ${
                       painCharacter === char
                         ? "border-teal-700 bg-teal-50 text-teal-900 shadow-xs"
                         : "border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
@@ -672,7 +705,7 @@ export default function PatientKioskPage() {
               <label className="text-base font-bold text-slate-900 block">
                 Does the pain move anywhere else?
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
                   "Radiates to Left Arm and Jaw",
                   "Stays in one spot (Localized)",
@@ -683,7 +716,7 @@ export default function PatientKioskPage() {
                     key={rad}
                     type="button"
                     onClick={() => setPainRadiation(rad)}
-                    className={`p-3.5 rounded-xl border text-sm font-bold text-left transition-all ${
+                    className={`p-4 rounded-2xl border-2 text-sm font-bold text-left transition-all ${
                       painRadiation === rad
                         ? "border-teal-700 bg-teal-50 text-teal-900 shadow-xs"
                         : "border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
@@ -726,13 +759,13 @@ export default function PatientKioskPage() {
         )}
 
         {/* =========================================================================
-            SCREEN 7: AYUSH ASSESSMENT (DASHAVIDHA PARIKSHA)
+            SCREEN 6: AYUSH ASSESSMENT (DASHAVIDHA PARIKSHA)
            ========================================================================= */}
         {currentStep === 6 && (
           <section className="kiosk-card p-8 sm:p-12 w-full max-w-2xl mx-auto space-y-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
-                AYUSH Assessment
+                AYUSH Dashavidha Pariksha
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
                 {ayushQuestions[ayushIndex].title}
@@ -764,7 +797,7 @@ export default function PatientKioskPage() {
                   >
                     <span className="text-base font-semibold">{choice.label}</span>
                     {isSelected && (
-                      <div className="w-6 h-6 rounded-full bg-teal-700 text-white flex items-center justify-center shrink-0">
+                      <div className="w-6 h-6 rounded-full bg-teal-700 text-white flex items-center justify-center shrink-0 shadow-xs">
                         <Check className="w-4 h-4" />
                       </div>
                     )}
@@ -805,19 +838,19 @@ export default function PatientKioskPage() {
         )}
 
         {/* =========================================================================
-            SCREEN 8 & 9: DOCUMENT SCANNING & OCR REVIEW
+            SCREEN 7: DOCUMENT SCANNING & OCR
            ========================================================================= */}
         {currentStep === 7 && (
           <section className="kiosk-card p-8 sm:p-12 w-full max-w-3xl mx-auto space-y-6">
             <div className="text-center max-w-lg mx-auto">
               <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
-                Medical Records
+                Medical Document Digitization
               </span>
               <h2 className="text-3xl font-extrabold text-slate-900 mt-2">
                 Do you have previous medical records?
               </h2>
               <p className="text-base text-slate-500 mt-1">
-                Scanning your prescriptions and reports helps your doctor see your past treatments instantly.
+                Scanning your prescriptions and lab reports helps your doctor see your medical history immediately.
               </p>
             </div>
 
@@ -826,14 +859,14 @@ export default function PatientKioskPage() {
               <button
                 type="button"
                 onClick={() => setIsScannerOpen(true)}
-                className="p-6 rounded-3xl border-2 border-teal-700 bg-teal-50/50 hover:bg-teal-100/50 flex flex-col items-center justify-center gap-3 transition-all min-h-[140px] text-center"
+                className="p-6 rounded-3xl border-2 border-teal-700 bg-teal-50/50 hover:bg-teal-100/50 flex flex-col items-center justify-center gap-3 transition-all min-h-[140px] text-center shadow-xs"
               >
-                <div className="w-12 h-12 rounded-2xl bg-teal-700 text-white flex items-center justify-center shadow-xs">
+                <div className="w-12 h-12 rounded-2xl bg-teal-700 text-white flex items-center justify-center shadow-sm">
                   <Camera className="w-6 h-6" />
                 </div>
                 <div>
                   <span className="text-base font-bold text-teal-900 block">Scan Document</span>
-                  <span className="text-xs text-teal-700">Use kiosk camera</span>
+                  <span className="text-xs text-teal-700">Use kiosk laser camera</span>
                 </div>
               </button>
 
@@ -875,13 +908,13 @@ export default function PatientKioskPage() {
                 {documents.map((doc) => (
                   <div
                     key={doc.id}
-                    className="flex items-center justify-between p-3 bg-white rounded-xl border border-slate-200 text-sm"
+                    className="flex items-center justify-between p-3.5 bg-white rounded-xl border border-slate-200 text-sm shadow-xs"
                   >
                     <div className="flex items-center gap-3">
                       <FileText className="w-5 h-5 text-teal-700" />
                       <div>
                         <span className="font-bold text-slate-900 block">{doc.original_filename}</span>
-                        <span className="text-xs text-slate-500">
+                        <span className="text-xs text-slate-500 font-mono">
                           {doc.entities?.length || 0} clinical entities extracted cleanly
                         </span>
                       </div>
@@ -916,7 +949,7 @@ export default function PatientKioskPage() {
         )}
 
         {/* =========================================================================
-            SCREEN 10 & 11: PATIENT REVIEW & RED FLAG
+            SCREEN 8: PATIENT REVIEW & RED FLAG
            ========================================================================= */}
         {currentStep === 8 && (
           <section className="kiosk-card p-8 sm:p-12 w-full max-w-3xl mx-auto space-y-6">
@@ -934,20 +967,20 @@ export default function PatientKioskPage() {
 
             {/* Emergency Red Flag Notice if present (Calm, non-frightening) */}
             {hasRedFlag && (
-              <div className="p-6 rounded-3xl bg-red-50 border-2 border-red-200 text-red-950">
+              <div className="p-6 rounded-3xl bg-red-50 border-2 border-red-200 text-red-950 shadow-xs">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center shrink-0">
-                    <ShieldAlert className="w-5 h-5" />
+                  <div className="w-12 h-12 rounded-2xl bg-red-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <ShieldAlert className="w-6 h-6" />
                   </div>
                   <div>
                     <span className="text-xs font-black uppercase tracking-wider text-red-800 bg-red-200/80 px-2.5 py-0.5 rounded-full">
                       Priority: HIGH
                     </span>
                     <h3 className="text-lg font-bold text-red-900 mt-2">
-                      Your responses need immediate medical attention.
+                      Your responses indicate symptoms that require immediate clinical review.
                     </h3>
                     <p className="text-sm text-red-800 mt-1">
-                      Our clinical red-flag engine has marked this case for priority physician review. Please proceed to the waiting area after token generation.
+                      Our clinical safety engine has notified the triage nurse. A doctor will review your case with priority.
                     </p>
                   </div>
                 </div>
@@ -968,13 +1001,13 @@ export default function PatientKioskPage() {
                   onClick={() => setCurrentStep(2)}
                   className="text-xs font-bold text-teal-700 flex items-center gap-1 hover:underline"
                 >
-                  <Edit3 className="w-3.5 h-3.5" /> Edit
+                  <Edit3 className="w-3.5 h-3.5" /> Edit Demographics
                 </button>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase block">Main Concern</span>
+                  <span className="text-xs font-bold text-slate-400 uppercase block">Main Complaint</span>
                   <span className="font-semibold text-slate-900">{chiefComplaint}</span>
                 </div>
                 <div>
@@ -1003,7 +1036,7 @@ export default function PatientKioskPage() {
                 onClick={() => setCurrentStep(7)}
                 className="btn-kiosk-secondary w-full sm:w-auto"
               >
-                Edit Answers
+                Back to Documents
               </button>
 
               <button
@@ -1012,7 +1045,7 @@ export default function PatientKioskPage() {
                 disabled={isSubmitting}
                 className="btn-kiosk-primary w-full sm:w-auto"
               >
-                {isSubmitting ? "Generating Token..." : "Looks correct — Confirm & Submit"}
+                {isSubmitting ? "Generating Token..." : "Confirm & Generate Token"}
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
@@ -1020,70 +1053,70 @@ export default function PatientKioskPage() {
         )}
 
         {/* =========================================================================
-            SCREEN 12: SUBMISSION & OPD TOKEN CONFIRMATION
+            SCREEN 9: SUBMISSION & OPD TOKEN CONFIRMATION
            ========================================================================= */}
         {currentStep === 9 && (
           <section className="kiosk-card p-8 sm:p-12 w-full max-w-xl mx-auto text-center space-y-6">
-            <div className="w-16 h-16 rounded-full bg-green-100 text-green-700 flex items-center justify-center mx-auto shadow-sm">
+            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto shadow-sm">
               <Check className="w-8 h-8" />
             </div>
 
             <div>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
-                Your information has been sent to your care team.
+                Your consultation token is ready!
               </h2>
               <p className="text-base text-slate-600 mt-2">
-                Your clinical case file and prescription records have been synced with the doctor's workstation.
+                Your clinical case file and digitized prescriptions have been synced with Consultation Chamber 4.
+              </p>
+            </div>
+
+            {/* Generated OPD Token Thermal Box */}
+            <div className="p-7 rounded-3xl bg-teal-50/70 border-2 border-teal-600 text-center space-y-3 shadow-md">
+              <div className="flex items-center justify-between border-b border-teal-200 pb-2 text-xs font-bold text-teal-800 uppercase tracking-widest">
+                <span>OPD Token</span>
+                <span>Chamber 4</span>
+              </div>
+              <div className="text-6xl sm:text-7xl font-black text-teal-950 font-mono tracking-tight py-2">
+                {generatedSession?.token_number || "OPD-042"}
+              </div>
+              <div className="text-sm font-bold text-teal-900">
+                Dr. Priya Deshmukh, MD (General Medicine & Cardiology)
+              </div>
+              <p className="text-xs text-teal-700 font-medium">
+                Estimated wait: ~8 minutes • Please watch the Waiting Room TV
               </p>
             </div>
 
             {/* Checklist items */}
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-left space-y-2 text-sm text-slate-700">
-              <div className="flex items-center gap-2 text-green-800 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-green-600" />
-                <span>History collected & structured</span>
+              <div className="flex items-center gap-2 text-emerald-800 font-semibold">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>Bilingual clinical history structured & verified</span>
               </div>
-              <div className="flex items-center gap-2 text-green-800 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-green-600" />
-                <span>Previous records processed</span>
+              <div className="flex items-center gap-2 text-emerald-800 font-semibold">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>Physical prescription OCR digitized</span>
               </div>
-              <div className="flex items-center gap-2 text-green-800 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-green-600" />
-                <span>Doctor summary prepared</span>
-              </div>
-            </div>
-
-            {/* Generated OPD Token Box */}
-            <div className="p-6 rounded-3xl bg-teal-50 border-2 border-teal-600 text-center space-y-2 shadow-sm">
-              <span className="text-xs font-bold uppercase tracking-widest text-teal-800">
-                Consultation Token Number
-              </span>
-              <div className="text-5xl sm:text-6xl font-black text-teal-950 font-mono tracking-tight">
-                {generatedSession?.token_number || "OPD-042"}
-              </div>
-              <div className="text-sm font-bold text-teal-900 pt-1">
-                Consultation Chamber 4 • Dr. Priya Deshmukh, MD
+              <div className="flex items-center gap-2 text-emerald-800 font-semibold">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>Doctor workstation summary generated</span>
               </div>
             </div>
-
-            <p className="text-lg font-bold text-slate-800">
-              Please proceed to the waiting area.
-            </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => window.print()}
-                className="btn-kiosk-secondary text-sm py-3 px-5 flex items-center gap-2 min-h-[48px]"
+                className="btn-kiosk-secondary text-sm py-3 px-5 flex items-center gap-2 min-h-[48px] w-full sm:w-auto justify-center"
               >
-                <Printer className="w-4 h-4" /> Print OPD Slip
+                <Printer className="w-4 h-4" /> Print Thermal Slip
               </button>
 
               <Link
                 href="/doctor"
-                className="btn-kiosk-primary text-sm py-3 px-5 flex items-center gap-2 min-h-[48px]"
+                className="btn-kiosk-primary text-sm py-3 px-5 flex items-center gap-2 min-h-[48px] w-full sm:w-auto justify-center"
               >
-                View in Doctor Console <ArrowRight className="w-4 h-4" />
+                Open in Doctor Console <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </section>

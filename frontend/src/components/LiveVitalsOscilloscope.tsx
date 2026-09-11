@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { Activity, Heart, Radio } from "lucide-react";
+import { Activity, Heart, Radio, AlertTriangle } from "lucide-react";
 import { hospitalEventBus } from "@/lib/events";
 
 interface LiveVitalsProps {
@@ -59,19 +59,19 @@ export default function LiveVitalsOscilloscope({
     const midY = height / 2;
 
     // Background clear with dark medical grid
-    ctx.fillStyle = "#050e1a";
+    ctx.fillStyle = "#030812";
     ctx.fillRect(0, 0, width, height);
 
     // Draw grid
-    ctx.strokeStyle = "rgba(16, 185, 129, 0.08)";
+    ctx.strokeStyle = "rgba(20, 184, 166, 0.1)";
     ctx.lineWidth = 1;
-    for (let gx = 0; gx < width; gx += 15) {
+    for (let gx = 0; gx < width; gx += 16) {
       ctx.beginPath();
       ctx.moveTo(gx, 0);
       ctx.lineTo(gx, height);
       ctx.stroke();
     }
-    for (let gy = 0; gy < height; gy += 15) {
+    for (let gy = 0; gy < height; gy += 16) {
       ctx.beginPath();
       ctx.moveTo(0, gy);
       ctx.lineTo(width, gy);
@@ -82,18 +82,18 @@ export default function LiveVitalsOscilloscope({
 
     const render = () => {
       const step = isAlert ? 3 : 2;
-      const beatInterval = Math.max(35, Math.floor(2400 / hr));
+      const beatInterval = Math.max(35, Math.floor(2600 / hr));
 
       // Erase ahead bar
-      ctx.fillStyle = "#050e1a";
-      ctx.fillRect(x, 0, 18, height);
+      ctx.fillStyle = "#030812";
+      ctx.fillRect(x, 0, 24, height);
 
       // Re-draw grid ahead
-      ctx.strokeStyle = "rgba(16, 185, 129, 0.08)";
-      for (let gy = 0; gy < height; gy += 15) {
+      ctx.strokeStyle = "rgba(20, 184, 166, 0.1)";
+      for (let gy = 0; gy < height; gy += 16) {
         ctx.beginPath();
         ctx.moveTo(x, gy);
-        ctx.lineTo(x + 18, gy);
+        ctx.lineTo(x + 24, gy);
         ctx.stroke();
       }
 
@@ -102,20 +102,20 @@ export default function LiveVitalsOscilloscope({
       const phaseInBeat = beatPhase % beatInterval;
 
       if (phaseInBeat === 6) y = midY - 6; // P wave
-      else if (phaseInBeat === 7) y = midY - 10;
-      else if (phaseInBeat === 8) y = midY - 4;
-      else if (phaseInBeat === 12) y = midY + 5; // Q wave
-      else if (phaseInBeat === 14) y = midY - 32; // R spike
-      else if (phaseInBeat === 15) y = midY + 12; // S wave
+      else if (phaseInBeat === 7) y = midY - 11;
+      else if (phaseInBeat === 8) y = midY - 5;
+      else if (phaseInBeat === 12) y = midY + 6; // Q wave
+      else if (phaseInBeat === 14) y = midY - 34; // R spike
+      else if (phaseInBeat === 15) y = midY + 14; // S wave
       else if (phaseInBeat === 20) y = midY - 8; // T wave
-      else if (phaseInBeat === 21) y = midY - 12;
+      else if (phaseInBeat === 21) y = midY - 13;
       else if (phaseInBeat === 22) y = midY - 6;
 
       // Draw ECG line with glow
       ctx.beginPath();
-      ctx.strokeStyle = isAlert ? "#f43f5e" : "#10b981";
-      ctx.shadowColor = isAlert ? "#f43f5e" : "#10b981";
-      ctx.shadowBlur = 8;
+      ctx.strokeStyle = isAlert ? "#f43f5e" : "#14b8a6";
+      ctx.shadowColor = isAlert ? "#f43f5e" : "#14b8a6";
+      ctx.shadowBlur = 10;
       ctx.lineWidth = 2.2;
       ctx.moveTo(x, midY);
       ctx.lineTo(x + step, y);
@@ -140,50 +140,50 @@ export default function LiveVitalsOscilloscope({
   }, [hr, isAlert]);
 
   return (
-    <div className="flex flex-col sm:flex-row items-center gap-3 bg-slate-950/90 p-2.5 rounded-2xl border border-slate-800 shadow-xl">
+    <div className="flex flex-col lg:flex-row items-center justify-between gap-4 bg-[#0a0f1d]/90 p-4 rounded-3xl border border-white/10 shadow-2xl backdrop-blur-xl">
       {/* Canvas Oscilloscope */}
-      <div className="relative overflow-hidden rounded-xl border border-emerald-500/30 bg-[#050e1a] shadow-inner">
+      <div className="relative overflow-hidden rounded-2xl border border-teal-500/30 bg-[#030812] shadow-inner w-full lg:w-auto">
         <canvas
           ref={canvasRef}
-          width={180}
-          height={52}
-          className="w-[180px] h-[52px] block"
+          width={320}
+          height={68}
+          className="w-full lg:w-[320px] h-[68px] block"
         />
-        <div className="absolute top-1 left-2 flex items-center gap-1 text-[9px] font-mono font-bold text-emerald-400">
-          <Activity className="w-2.5 h-2.5 animate-pulse" />
-          <span>LEAD II • ECG</span>
+        <div className="absolute top-2 left-3 flex items-center gap-1.5 text-[10px] font-mono font-bold text-teal-400">
+          <Activity className="w-3 h-3 animate-pulse" />
+          <span>REAL-TIME LEAD II ECG • 25mm/s</span>
         </div>
       </div>
 
       {/* Telemetry Numeric Readouts */}
-      <div className="flex items-center gap-2">
+      <div className="grid grid-cols-3 gap-3 w-full lg:w-auto">
         <div
-          className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border transition-all ${
+          className={`flex items-center gap-3 px-4 py-2.5 rounded-2xl border transition-all ${
             isAlert
               ? "bg-red-950/60 border-red-500/50 text-red-300 animate-pulse"
-              : "bg-slate-900 border-slate-800 text-slate-200"
+              : "bg-slate-900 border-white/5 text-slate-200"
           }`}
         >
-          <Heart className={`w-4 h-4 ${isAlert ? "text-red-400" : "text-rose-400"} animate-pulse`} />
+          <Heart className={`w-5 h-5 ${isAlert ? "text-red-400" : "text-rose-400"} animate-pulse shrink-0`} />
           <div>
-            <span className="text-[9px] text-slate-400 block font-semibold uppercase">PULSE</span>
-            <span className="text-xs font-black font-mono">{hr} bpm</span>
+            <span className="text-[10px] text-slate-400 block font-bold uppercase tracking-wider">HEART RATE</span>
+            <span className="text-base font-black font-mono text-white">{hr} <span className="text-xs font-normal text-slate-400">bpm</span></span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-200">
-          <Activity className="w-4 h-4 text-cyan-400" />
+        <div className="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-slate-900 border border-white/5 text-slate-200">
+          <Activity className="w-5 h-5 text-teal-400 shrink-0" />
           <div>
-            <span className="text-[9px] text-slate-400 block font-semibold uppercase">BP</span>
-            <span className="text-xs font-black font-mono">{bp}</span>
+            <span className="text-[10px] text-slate-400 block font-bold uppercase tracking-wider">BLOOD PRESSURE</span>
+            <span className="text-base font-black font-mono text-white">{bp} <span className="text-xs font-normal text-slate-400">mmHg</span></span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-200">
-          <Radio className="w-4 h-4 text-emerald-400" />
+        <div className="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-slate-900 border border-white/5 text-slate-200">
+          <Radio className="w-5 h-5 text-emerald-400 shrink-0" />
           <div>
-            <span className="text-[9px] text-slate-400 block font-semibold uppercase">SPO2</span>
-            <span className="text-xs font-black font-mono">{spo2Val}%</span>
+            <span className="text-[10px] text-slate-400 block font-bold uppercase tracking-wider">OXYGEN SPO2</span>
+            <span className="text-base font-black font-mono text-teal-300">{spo2Val}% <span className="text-xs font-normal text-slate-400">Room Air</span></span>
           </div>
         </div>
       </div>
